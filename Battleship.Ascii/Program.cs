@@ -17,7 +17,7 @@ namespace Battleship.Ascii
       static void Main()
       {
          Console.Title = "Battleship";
-         Console.BackgroundColor = ConsoleColor.Black;
+         Console.BackgroundColor = ConsoleColor.Blue;
          Console.Clear();
          
          Console.WriteLine("                                     |__");
@@ -146,27 +146,75 @@ namespace Battleship.Ascii
       {
          enemyFleet = GameController.InitializeShips().ToList();
 
-         enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 4 });
-         enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 5 });
-         enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 6 });
-         enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 7 });
-         enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 8 });
+        
+        Opponent d = (Opponent)(new Random()).Next(0, 12);
+            switch (d)
+            {
+                case Opponent.Arpad:
+                    Console.WriteLine("The opponent is Arpad");
+                    break;
+                case Opponent.Ciprian:
+                    Console.WriteLine("The opponent is Ciprian");
+                    break;
+                case Opponent.Daniel:
+                    Console.WriteLine("The opponent is Daniel");
+                    break;
+                case Opponent.David:
+                    Console.WriteLine("The opponent is David");
+                    break;
+                case Opponent.John:
+                    Console.WriteLine("The opponent is John");
+                    break;
+                case Opponent.Massimo:
+                    Console.WriteLine("The opponent is Massimo");
+                    break;
+                case Opponent.Matthew:
+                    Console.WriteLine("The opponent is Matthew");
+                    break;
+                case Opponent.Nich:
+                    Console.WriteLine("The opponent is Nich");
+                    break;
+                case Opponent.Peter:
+                    Console.WriteLine("The opponent is Peter");
+                    break;
+                case Opponent.Richard:
+                    Console.WriteLine("The opponent is Richard");
+                    break;
+                case Opponent.Sukhi:
+                    Console.WriteLine("The opponent is Sukhi");
+                    break;
+                case Opponent.Thomas:
+                    Console.WriteLine("The opponent is Daniel");
+                    break;
+                default:
+                    Console.WriteLine("The opponent is the computer");
+                    break;
 
-         enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 6 });
-         enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 7 });
-         enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 8 });
-         enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 9 });
+        }
+        // john is confused, isn't the game 8X8 on our board? so why are there 9 rows. The real game is 10X10 though. 
 
-         enemyFleet[2].Positions.Add(new Position { Column = Letters.A, Row = 3 });
-         enemyFleet[2].Positions.Add(new Position { Column = Letters.B, Row = 3 });
-         enemyFleet[2].Positions.Add(new Position { Column = Letters.C, Row = 3 });
+        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 4 });
+        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 5 });
+        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 6 });
+        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 7 });
+        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 8 });
 
-         enemyFleet[3].Positions.Add(new Position { Column = Letters.F, Row = 8 });
-         enemyFleet[3].Positions.Add(new Position { Column = Letters.G, Row = 8 });
-         enemyFleet[3].Positions.Add(new Position { Column = Letters.H, Row = 8 });
+        enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 6 });
+        enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 7 });
+        enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 8 });
+        enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 9 });
 
-         enemyFleet[4].Positions.Add(new Position { Column = Letters.C, Row = 5 });
-         enemyFleet[4].Positions.Add(new Position { Column = Letters.C, Row = 6 });
+        enemyFleet[2].Positions.Add(new Position { Column = Letters.A, Row = 3 });
+        enemyFleet[2].Positions.Add(new Position { Column = Letters.B, Row = 3 });
+        enemyFleet[2].Positions.Add(new Position { Column = Letters.C, Row = 3 });
+
+        enemyFleet[3].Positions.Add(new Position { Column = Letters.F, Row = 8 });
+        enemyFleet[3].Positions.Add(new Position { Column = Letters.G, Row = 8 });
+        enemyFleet[3].Positions.Add(new Position { Column = Letters.H, Row = 8 });
+
+        enemyFleet[4].Positions.Add(new Position { Column = Letters.C, Row = 5 });
+        enemyFleet[4].Positions.Add(new Position { Column = Letters.C, Row = 6 });
       }
    }
 }
+
