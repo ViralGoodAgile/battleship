@@ -116,8 +116,20 @@ namespace Battleship.Ascii
           var position = new Position(letter, number);
           return position;
       }
+        private static String GetRandomDirection()
+        {
+            var random = new Random();
+            if (random.Next(2).ToString() == "1")
+            {
+                return "H";
+            }
+            else
+            {
+                return "V";
+            }
+        }
 
-      private static void InitializeGame()
+        private static void InitializeGame()
       {
          InitializeMyFleet();
 
@@ -127,7 +139,8 @@ namespace Battleship.Ascii
       private static void InitializeMyFleet()
       {
          myFleet = GameController.InitializeShips().ToList();
-
+            /* commented out to make running the game easier to test
+             
          Console.WriteLine("Please position your fleet (Game board size is from A to H and 1 to 8) :");
 
          foreach (var ship in myFleet)
@@ -139,14 +152,32 @@ namespace Battleship.Ascii
                Console.WriteLine("Enter position {0} of {1} (i.e A3):", i, ship.Size);
                ship.AddPosition(Console.ReadLine());
             }
-         }
+         }*/
       }
 
-      private static void InitializeEnemyFleet()
-      {
-         enemyFleet = GameController.InitializeShips().ToList();
+        private static void InitializeEnemyFleet()
+        {
+            enemyFleet = GameController.InitializeShips().ToList();
 
+            // Get a random position and direction
+            var position = GetRandomPosition();
+            string direction = GetRandomDirection();
+            
+            // Initialize the aircraft carrier (random position and direction)
+            for (int i = 0; i < enemyFleet[0].Size; i++)
+            {
+                if (direction.ToString() == "H")
+                {
+                    enemyFleet[0].Positions.Add(new Position { Column = (Letters)position.Column, Row = position.Row + i }); 
+                }
+                else
+                {
+                    enemyFleet[0].Positions.Add(new Position { Column = (Letters)position.Column + i, Row = position.Row});
+                }
+            }
+                
         
+            /*
         Opponent d = (Opponent)(new Random()).Next(0, 12);
             switch (d)
             {
@@ -192,12 +223,13 @@ namespace Battleship.Ascii
 
         }
         // john is confused, isn't the game 8X8 on our board? so why are there 9 rows. The real game is 10X10 though. 
-
+            
+        // This is the aircraft carrier, placed by the code above
         enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 4 });
         enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 5 });
         enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 6 });
         enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 7 });
-        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 8 });
+        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 8 }); */
 
         enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 6 });
         enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 7 });
