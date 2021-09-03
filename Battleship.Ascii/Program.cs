@@ -106,13 +106,13 @@ namespace Battleship.Ascii
          return new Position(letter, number);
       }
 
-      private static Position GetRandomPosition()
+      private static Position GetRandomPosition(int length = 0)
       {
-          int rows = 8;
-          int lines = 8;
+          int rows = 10 - length;
+          int lines = 10 - length;
           var random = new Random();
-          var letter = (Letters)random.Next(lines);
-          var number = random.Next(rows);
+          var letter = (Letters)random.Next(1, lines);
+          var number = random.Next(1, rows);
           var position = new Position(letter, number);
           return position;
       }
@@ -160,76 +160,30 @@ namespace Battleship.Ascii
             enemyFleet = GameController.InitializeShips().ToList();
 
             // Get a random position and direction
-            var position = GetRandomPosition();
-            string direction = GetRandomDirection();
-            
-            // Initialize the aircraft carrier (random position and direction)
-            for (int i = 0; i < enemyFleet[0].Size; i++)
-            {
-                if (direction.ToString() == "H")
+
+            for (int h = 0; h < enemyFleet.Count; h++)
+            { 
+                var position = GetRandomPosition(enemyFleet[h].Size);
+
+                Console.WriteLine("Ship size is {0}:", enemyFleet[h].Size);
+                Console.WriteLine("random position is {0}{1}", position.Column.ToString(), position.Row.ToString());
+                Console.ReadLine();
+
+                string direction = GetRandomDirection();
+
+                // Initialize the aircraft carrier (random position and direction)
+                for (int i = 0; i < enemyFleet[h].Size; i++)
                 {
-                    enemyFleet[0].Positions.Add(new Position { Column = (Letters)position.Column, Row = position.Row + i }); 
-                }
-                else
-                {
-                    enemyFleet[0].Positions.Add(new Position { Column = (Letters)position.Column + i, Row = position.Row});
+                    if (direction.ToString() == "H")
+                    {
+                        enemyFleet[0].Positions.Add(new Position { Column = (Letters)position.Column, Row = position.Row + i });
+                    }
+                    else
+                    {
+                        enemyFleet[0].Positions.Add(new Position { Column = (Letters)position.Column + i, Row = position.Row });
+                    }
                 }
             }
-                
-        
-            /*
-        Opponent d = (Opponent)(new Random()).Next(0, 12);
-            switch (d)
-            {
-                case Opponent.Arpad:
-                    Console.WriteLine("The opponent is Arpad");
-                    break;
-                case Opponent.Ciprian:
-                    Console.WriteLine("The opponent is Ciprian");
-                    break;
-                case Opponent.Daniel:
-                    Console.WriteLine("The opponent is Daniel");
-                    break;
-                case Opponent.David:
-                    Console.WriteLine("The opponent is David");
-                    break;
-                case Opponent.John:
-                    Console.WriteLine("The opponent is John");
-                    break;
-                case Opponent.Massimo:
-                    Console.WriteLine("The opponent is Massimo");
-                    break;
-                case Opponent.Matthew:
-                    Console.WriteLine("The opponent is Matthew");
-                    break;
-                case Opponent.Nich:
-                    Console.WriteLine("The opponent is Nich");
-                    break;
-                case Opponent.Peter:
-                    Console.WriteLine("The opponent is Peter");
-                    break;
-                case Opponent.Richard:
-                    Console.WriteLine("The opponent is Richard");
-                    break;
-                case Opponent.Sukhi:
-                    Console.WriteLine("The opponent is Sukhi");
-                    break;
-                case Opponent.Thomas:
-                    Console.WriteLine("The opponent is Daniel");
-                    break;
-                default:
-                    Console.WriteLine("The opponent is the computer");
-                    break;
-
-        }
-        // john is confused, isn't the game 8X8 on our board? so why are there 9 rows. The real game is 10X10 though. 
-            
-        // This is the aircraft carrier, placed by the code above
-        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 4 });
-        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 5 });
-        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 6 });
-        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 7 });
-        enemyFleet[0].Positions.Add(new Position { Column = Letters.B, Row = 8 }); */
 
         enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 6 });
         enemyFleet[1].Positions.Add(new Position { Column = Letters.E, Row = 7 });
